@@ -7,7 +7,7 @@ function MovieCard({image, title, rating}){
                 <img id= "movie-img" src={image} />
                 <div className="text-card">
                     <h2>{title}</h2>
-                    <p>⭐️ {rating}</p>
+                    <p>Rating: ⭐️ {rating}</p>
                 </div>
 
             </section>
