@@ -1,0 +1,51 @@
+.moviesList{
+    display: flex; /* Enable flexbox layout */
+    flex-wrap: wrap;
+
+    gap: 50px;
+
+    /* position: relative; */
+    place-content: center;
+
+    display: flex;
+    flex: 1;
+
+
+
+}
+
+.loadButton{
+    
+    width: 100%;
+    height: 100%;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+}
+
+#click{
+    background-color: #20263e;
+    text-align: center;
+    width: 20%;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+
+    transition: background-color 0.3s ease;
+
+}
+
+
+
+#click:hover {
+  background-color: #777;
+  color: white;
+
+}
