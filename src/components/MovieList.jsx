@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import "./MovieList.css";
-// import Search from "./Search";
-// import Sort from "./Sort";
-// import React from "react";
-// import { BsSearch } from 'react-icons/bs';
+import Modal from "./Modal";
+
 
 function MovieList(){
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    // const [searchVal, setSearchVal] = useState();
-    // const [sortType, setSortType] = useState("sort-by")
+    const [openModal, setOpenModal] = useState(false);
 
     // Fetching movies per page
     useEffect(() => {
@@ -46,11 +43,6 @@ function MovieList(){
             .catch(err => console.error(err));
     }
 
-    //increaing the page number by 1 when the button is clicked
-    const loadMore = () => {
-        setPage(page +1);
-    };
-
     //fetching for search
     const handleSearch = (e) => {
         const options = {
@@ -67,14 +59,33 @@ function MovieList(){
             .catch(err => console.error(err));
     }
 
+    //increaing the page number by 1 when the button is clicked
+    const loadMore = () => {
+        setPage(page +1);
+    };
+
+    const handleClose = () => {
+        setOpenModal(false);
+    };
+
+    const handleOpen = () => {
+        console.log("opening")
+        setOpenModal(true);
+    };
+
 
     return(
         <div>
 
+            {openModal && <Modal onClose = {handleClose}/>}
+
+
+            {/* SEARCH HTML */}
             <form>
                 <input type="text" onChange={e => handleSearch(e)} placeholder="Search for a movie..."></input>
             </form>
 
+            {/* SORTING HTML */}
             <select onChange={(e) => handleSort(e)}>
                 <option value="sort-by">Sort by</option>
                 <option value="vote_average.desc">Vote Average Descending</option>
@@ -89,15 +100,15 @@ function MovieList(){
             </select>
 
 
-
+            {/* MOVIE CARD HTML */}
             <div className="moviesList">
                 {data?.map((movie, index) => (
-                    <MovieCard key={index} image={"https://image.tmdb.org/t/p/w500" + movie.poster_path} title={movie.title} rating={movie.vote_average}/>
+                    <MovieCard handleOnClick={handleOpen} key={index} image={"https://image.tmdb.org/t/p/w500" + movie.poster_path} title={movie.title} rating={movie.vote_average}/>
                 ))}
             </div>
 
 
-
+            {/* LOAD MORE HTML */}
             <div className="loadButton">
                 <button id="click"onClick={loadMore}
                     >Load More</button>
