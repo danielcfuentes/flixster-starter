@@ -83,29 +83,59 @@ function MovieList() {
     <div>
       {openModal && <Modal onClose={handleClose} modalID={id} />}
 
-      {/* SEARCH HTML */}
-      <form>
-        <input
-          type="text"
-          onChange={(e) => handleSearch(e)}
-          placeholder="Search for a movie..."
-        ></input>
-      </form>
+      {/* SEARCH AND SORT HTML */}
+      <div className="searchAndSortContainer">
+        <form className="searchContainer">
+          <div className="Card">
+            <div className="CardInner">
+              <label>Search for a Movie</label>
+              <div className="container">
+                <div className="Icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#657789"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="feather feather-search"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                </div>
+                <div className="InputContainer">
+                  <input
+                    type="text"
+                    onChange={(e) => handleSearch(e)}
+                    placeholder="Ex: Bad Boys"
+                  ></input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
 
-      {/* SORTING HTML */}
-      <select onChange={(e) => handleSort(e)}>
-        <option value="sort-by">Sort by</option>
-        <option value="vote_average.desc">Vote Average Descending</option>
-        <option value="vote_average.asc">Vote Average Ascending</option>
-        <option value="title.desc">Title Descending</option>
-        <option value="title.asc">Title Ascending</option>
-        <option value="primary_release_date.desc">
-          Release Date Descending
-        </option>
-        <option value="primary_release_date.asc">Release Date Ascending</option>
-        <option value="popularity.desc">Popularity Descending</option>
-        <option value="popularity.asc">Popularity Ascending</option>
-      </select>
+        {/* SORTING HTML */}
+        <select onChange={(e) => handleSort(e)}>
+          <option value="sort-by">Sort by</option>
+          <option value="vote_average.desc">Vote Average Descending</option>
+          <option value="vote_average.asc">Vote Average Ascending</option>
+          <option value="title.desc">Title Descending</option>
+          <option value="title.asc">Title Ascending</option>
+          <option value="primary_release_date.desc">
+            Release Date Descending
+          </option>
+          <option value="primary_release_date.asc">
+            Release Date Ascending
+          </option>
+          <option value="popularity.desc">Popularity Descending</option>
+          <option value="popularity.asc">Popularity Ascending</option>
+        </select>
+      </div>
 
       {/* MOVIE CARD HTML */}
       <div className="moviesList">

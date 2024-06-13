@@ -7,11 +7,17 @@ import.meta.env.VITE_API_KEY;
 const App = () => {
   return (
     <div className="App">
-      <Header />
+      <header id="AppHeader">
+        <Header />
+      </header>
+      <body id = "AppBody">
+        <MovieList />
+      </body>
 
-      <MovieList />
-
+    <footer id = "AppFooter">
       <Footer />
+    </footer>
+
     </div>
   );
 };

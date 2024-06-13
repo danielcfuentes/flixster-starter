@@ -1,8 +1,27 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  width: 100%;
+  background-color: brown;
 }
 
-.App-header {
+#AppHeader{
+  background-color: purple;
+  width: 100%;
+}
+
+#AppBody{
+  background-color: lightgreen;
+  width: 100%;
+
+}
+
+#AppFooter{
+  background-color: orange;
+  width: 100%;
+}
+
+
+/* .App-header {
   background-color: #282c34;
   display: flex;
   flex-direction: row;
@@ -10,9 +29,9 @@
   justify-content: space-evenly;
   color: white;
   padding: 20px;
-}
+} */
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .movie-card {
     width: 100%;
   }
@@ -25,4 +44,4 @@
   .search-bar form {
     flex-direction: column;
   }
-}
+} */
