@@ -1,18 +1,8 @@
-.header{
-
-    align-items: center;
-    background-color: #20263e;
-    width: 100%;
-    color: white;
-    padding: 10px;
-    margin-bottom: 20px;
-    /* border: solid black;
-    border-radius: 10px; */
-
-
-    /* transform: perspective(500px) ;
-    transform-style: preserve-3d;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3); */
-
-
+.header {
+  align-items: center;
+  background-color: #20263e;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
 }

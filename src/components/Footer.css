@@ -1,40 +1,23 @@
-
-
-footer{
-    display: flex;
-
-    background-color: #20263e;
-    color: white;
-    /* position: absolute; */
-    justify-content:center;
-    /* bottom: 0; */
-    width: 100%;
-    padding: 20px;
-
-    margin-top: 10px;
-
+footer {
+  display: flex;
+  background-color: #20263e;
+  color: white;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  margin-top: 10px;
 }
 
-.footer-section{
-    /* display: flex; */
-    width: 100%;
-
+.footer-section {
+  width: 100%;
 }
 
-
-.footer-copyright{
-    display: flex;
-
-    justify-content: space-between;
-
-    width: 100%;
-
+.footer-copyright {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.footer-contact{
-
-}
-
-a{
-    color: lightgray
+a {
+  color: lightgray;
 }
