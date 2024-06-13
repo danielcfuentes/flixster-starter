@@ -20,7 +20,6 @@ const Modal = ({ onClose, modalID }) => {
       .then((response) => {
         setData(response);
       })
-      .catch((err) => console.error(err));
   }, []);
 
   return (
