@@ -8,6 +8,7 @@ function MovieList(){
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [openModal, setOpenModal] = useState(false);
+    const [id, setId] = useState(0);
 
     // Fetching movies per page
     useEffect(() => {
@@ -69,15 +70,19 @@ function MovieList(){
     };
 
     const handleOpen = () => {
+
         console.log("opening")
         setOpenModal(true);
+        // setId(id);
+
+
     };
 
 
     return(
         <div>
 
-            {openModal && <Modal onClose = {handleClose}/>}
+            {openModal && <Modal onClose = {handleClose} modalID = {id}  />}
 
 
             {/* SEARCH HTML */}
@@ -103,7 +108,7 @@ function MovieList(){
             {/* MOVIE CARD HTML */}
             <div className="moviesList">
                 {data?.map((movie, index) => (
-                    <MovieCard handleOnClick={handleOpen} key={index} image={"https://image.tmdb.org/t/p/w500" + movie.poster_path} title={movie.title} rating={movie.vote_average}/>
+                    <MovieCard handleOnClick={handleOpen} key={index} image={"https://image.tmdb.org/t/p/w500" + movie.poster_path} title={movie.title} rating={movie.vote_average} idFunc={setId} id={movie.id} />
                 ))}
             </div>
 
@@ -113,8 +118,6 @@ function MovieList(){
                 <button id="click"onClick={loadMore}
                     >Load More</button>
             </div>
-
-
         </div>
     );
 }
