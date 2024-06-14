@@ -54,10 +54,9 @@ function MovieList() {
     setSearch(value);
 
     if (value === "") {
-        resetSearch()
-    }
-    else{
-        performSearch(value)
+      resetSearch();
+    } else {
+      performSearch(value);
     }
   };
 
@@ -95,7 +94,7 @@ function MovieList() {
     )
       .then((response) => response.json())
       .then((response) => setData(response.results));
-  }
+  };
 
   //increaing the page number by 1 when the button is clicked
   const loadMore = () => {

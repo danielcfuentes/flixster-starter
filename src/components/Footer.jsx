@@ -15,8 +15,7 @@ const Footer = () => {
           <p>Phone: +1 (800) 555-5555</p>
 
           <p>
-            Email:{" "}
-            <a href="mailto:support@flixster.com">support@NOTFLIX.com</a>
+            Email: <a href="mailto:support@flixster.com">support@NOTFLIX.com</a>
           </p>
         </div>
       </section>
