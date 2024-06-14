@@ -1,25 +1,38 @@
 .App {
   /* text-align: center; */
   width: 100%;
-  background-color: brown;
+  background-color: black;
+  /* height: 100px; */
 }
 
 #AppHeader{
-  background-color: purple;
+  background-color: black;
+  /* background-color: orange; */
   width: 100%;
+
 }
 
 #AppBody{
-  background-color: lightgreen;
   width: 100%;
-
+  background-color: black;
 }
 
 #AppFooter{
-  background-color: orange;
+  background-color: black;
+  border-top: solid  #303030;
+  color: lightgray;
+  border-width: 10px;
   width: 100%;
+
+  text-align: center;
 }
 
+#container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 /* .App-header {
   background-color: #282c34;

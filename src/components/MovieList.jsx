@@ -88,7 +88,7 @@ function MovieList() {
         <form className="searchContainer">
           <div className="Card">
             <div className="CardInner">
-              <label>Search for a Movie</label>
+
               <div className="container">
                 <div className="Icon">
                   <svg
@@ -111,7 +111,7 @@ function MovieList() {
                   <input
                     type="text"
                     onChange={(e) => handleSearch(e)}
-                    placeholder="Ex: Bad Boys"
+                    placeholder="Search for a movie..."
                   ></input>
                 </div>
               </div>
@@ -120,8 +120,8 @@ function MovieList() {
         </form>
 
         {/* SORTING HTML */}
-        <select onChange={(e) => handleSort(e)}>
-          <option value="sort-by">Sort by</option>
+        <select className="sortContainer" onChange={(e) => handleSort(e)}>
+          <option value="sort-by">Sort By</option>
           <option value="vote_average.desc">Vote Average Descending</option>
           <option value="vote_average.asc">Vote Average Ascending</option>
           <option value="title.desc">Title Descending</option>

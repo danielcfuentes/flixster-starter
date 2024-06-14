@@ -1,9 +1,14 @@
 .header {
-  align-items: center;
-  background-color: #20263e;
-  /* width: 100%; */
-  color: white;
-  padding: 10px;
+  /* align-items: center; */
+  width: 100%;
+  color: #e50914;
+  /* padding-top: 10px; */
   text-align: center;
-  /* margin-bottom: 20px; */
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+
 }
+
+

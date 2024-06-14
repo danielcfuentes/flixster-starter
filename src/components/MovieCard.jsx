@@ -11,7 +11,7 @@ function MovieCard({ handleOnClick, image, title, rating, idFunc, id }) {
       <section className="movie" onClick={handleClick}>
         <img id="movie-img" src={image} />
         <div className="text-card">
-          <h2>{title}</h2>
+          <h2 id="truncate">{title}</h2>
           <p>Rating: ⭐️ {rating}</p>
         </div>
       </section>
