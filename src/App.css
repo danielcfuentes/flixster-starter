@@ -3,6 +3,9 @@
   width: 100%;
   background-color: black;
   /* height: 100px; */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 #AppHeader{
@@ -15,6 +18,9 @@
 #AppBody{
   width: 100%;
   background-color: black;
+  display: flex;
+  /* flex:1; */
+
 }
 
 #AppFooter{
@@ -23,7 +29,7 @@
   color: lightgray;
   border-width: 10px;
   width: 100%;
-
+  margin: 0;
   text-align: center;
 }
 
@@ -32,6 +38,7 @@
   flex-direction: column;
   margin-top: 0;
   margin-bottom: 0;
+  flex:1;
 }
 
 /* .App-header {

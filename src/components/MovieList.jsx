@@ -8,6 +8,8 @@ function MovieList() {
   const [page, setPage] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [id, setId] = useState(0);
+  const [search, setSearch] = useState("");
+  const [dataHasBeenSearched, setDataIsSearched] = useState(false);
 
   // Fetching movies per page
   useEffect(() => {
@@ -20,13 +22,35 @@ function MovieList() {
       },
     };
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setData([...data, ...response.results]));
-  }, [page]);
+    if (search !== "" && dataHasBeenSearched === false) { //if search is not empty then search for that movie
+
+        fetch(
+            `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`,
+            options
+        )
+        .then((response) => response.json())
+        .then((response) => setData(response.results));
+
+    }
+    else if (search !== "" && dataHasBeenSearched === true) {
+      //if search is not empty then search for that movie
+
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => setData([...data, ...response.results]));
+    } else if (search === "") {
+      fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => setData(response.results));
+    }
+
+  }, [page, search]);
 
   //fetching for sorting
   const handleSort = (e) => {
@@ -48,23 +72,23 @@ function MovieList() {
   };
 
   //fetching for search
-  const handleSearch = (e) => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YjZlZWIyYzQ5NzQ2Nzc2ZWNjYTRkNjQ0ZjBiMWI1NiIsInN1YiI6IjY2Njc2YTRhZWVhZGEwYTlkNWJlNzhiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._TqUxu7PLnxhDIb2tQ_jkFRMgvpyQWZoij2I5ECptTU",
-      },
-    };
+  //   const handleSearch = (e) => {
+  //     const options = {
+  //       method: "GET",
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization:
+  //           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YjZlZWIyYzQ5NzQ2Nzc2ZWNjYTRkNjQ0ZjBiMWI1NiIsInN1YiI6IjY2Njc2YTRhZWVhZGEwYTlkNWJlNzhiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._TqUxu7PLnxhDIb2tQ_jkFRMgvpyQWZoij2I5ECptTU",
+  //       },
+  //     };
 
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${e.target.value}&include_adult=false&language=en-US&page=1`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setData(response.results));
-  };
+  //     fetch(
+  //       `https://api.themoviedb.org/3/search/movie?query=${e.target.value}&include_adult=false&language=en-US&page=1`,
+  //       options
+  //     )
+  //       .then((response) => response.json())
+  //       .then((response) => setData(response.results));
+  //   };
 
   //increaing the page number by 1 when the button is clicked
   const loadMore = () => {
@@ -80,7 +104,7 @@ function MovieList() {
   };
 
   return (
-    <div>
+    <div className="bodyOfPage">
       {openModal && <Modal onClose={handleClose} modalID={id} />}
 
       {/* SEARCH AND SORT HTML */}
@@ -88,7 +112,6 @@ function MovieList() {
         <form className="searchContainer">
           <div className="Card">
             <div className="CardInner">
-
               <div className="container">
                 <div className="Icon">
                   <svg
@@ -110,7 +133,7 @@ function MovieList() {
                 <div className="InputContainer">
                   <input
                     type="text"
-                    onChange={(e) => handleSearch(e)}
+                    onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search for a movie..."
                   ></input>
                 </div>
@@ -143,7 +166,11 @@ function MovieList() {
           <MovieCard
             handleOnClick={handleOpen}
             key={index}
-            image={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
+            image={
+              movie?.poster_path
+                ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                : "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg"
+            }
             title={movie.title}
             rating={movie.vote_average}
             idFunc={setId}
