@@ -19,8 +19,11 @@
   max-width: 800px;
   width: 100%;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   color: lightgray;
+  /* overflow: auto; */
+  height: 810px;
+  overflow: scroll;
 }
 
 .close-button {

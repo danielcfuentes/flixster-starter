@@ -25,7 +25,6 @@ const Modal = ({ onClose, modalID }) => {
         console.error("Error fetching movie trailer:", error);
       });
 
-  
     setTrailerUrl(trailerUrl);
   };
 
@@ -71,13 +70,17 @@ const Modal = ({ onClose, modalID }) => {
   }, []);
 
   const handleToggleExpand = () => {
-    setIsExpanded(prevState => !prevState);
+    setIsExpanded((prevState) => !prevState);
+  };
+
+  const handleModalClick = (e) => {
+    e.stopPropagation();
   };
 
   // HTML -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
-    <section className="modal-overlay">
-      <div className="modal-content">
+    <section className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={handleModalClick}>
         <button className="close-button" onClick={onClose}>
           &times;
         </button>

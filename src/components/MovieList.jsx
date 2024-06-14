@@ -9,7 +9,6 @@ function MovieList() {
   const [openModal, setOpenModal] = useState(false);
   const [id, setId] = useState(0);
   const [search, setSearch] = useState("");
-  const [dataHasBeenSearched, setDataIsSearched] = useState(false);
 
   // Fetching movies per page
   useEffect(() => {
@@ -22,35 +21,13 @@ function MovieList() {
       },
     };
 
-    if (search !== "" && dataHasBeenSearched === false) { //if search is not empty then search for that movie
-
-        fetch(
-            `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`,
-            options
-        )
-        .then((response) => response.json())
-        .then((response) => setData(response.results));
-
-    }
-    else if (search !== "" && dataHasBeenSearched === true) {
-      //if search is not empty then search for that movie
-
-      fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`,
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => setData([...data, ...response.results]));
-    } else if (search === "") {
-      fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`,
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => setData(response.results));
-    }
-
-  }, [page, search]);
+    fetch(
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setData([...data, ...response.results]));
+  }, [page]);
 
   //fetching for sorting
   const handleSort = (e) => {
@@ -72,23 +49,53 @@ function MovieList() {
   };
 
   //fetching for search
-  //   const handleSearch = (e) => {
-  //     const options = {
-  //       method: "GET",
-  //       headers: {
-  //         accept: "application/json",
-  //         Authorization:
-  //           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YjZlZWIyYzQ5NzQ2Nzc2ZWNjYTRkNjQ0ZjBiMWI1NiIsInN1YiI6IjY2Njc2YTRhZWVhZGEwYTlkNWJlNzhiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._TqUxu7PLnxhDIb2tQ_jkFRMgvpyQWZoij2I5ECptTU",
-  //       },
-  //     };
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearch(value);
 
-  //     fetch(
-  //       `https://api.themoviedb.org/3/search/movie?query=${e.target.value}&include_adult=false&language=en-US&page=1`,
-  //       options
-  //     )
-  //       .then((response) => response.json())
-  //       .then((response) => setData(response.results));
-  //   };
+    if (value === "") {
+        resetSearch()
+    }
+    else{
+        performSearch(value)
+    }
+  };
+
+  const performSearch = (value) => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YjZlZWIyYzQ5NzQ2Nzc2ZWNjYTRkNjQ0ZjBiMWI1NiIsInN1YiI6IjY2Njc2YTRhZWVhZGEwYTlkNWJlNzhiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._TqUxu7PLnxhDIb2tQ_jkFRMgvpyQWZoij2I5ECptTU",
+      },
+    };
+
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setData(response.results));
+  };
+
+  const resetSearch = () => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YjZlZWIyYzQ5NzQ2Nzc2ZWNjYTRkNjQ0ZjBiMWI1NiIsInN1YiI6IjY2Njc2YTRhZWVhZGEwYTlkNWJlNzhiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._TqUxu7PLnxhDIb2tQ_jkFRMgvpyQWZoij2I5ECptTU",
+      },
+    };
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setData(response.results));
+  }
 
   //increaing the page number by 1 when the button is clicked
   const loadMore = () => {
@@ -133,7 +140,8 @@ function MovieList() {
                 <div className="InputContainer">
                   <input
                     type="text"
-                    onChange={(e) => setSearch(e.target.value)}
+                    value={search}
+                    onChange={handleSearch}
                     placeholder="Search for a movie..."
                   ></input>
                 </div>
