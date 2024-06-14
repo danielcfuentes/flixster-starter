@@ -1,10 +1,37 @@
 import PropTypes from "prop-types";
 import "./Modal.css";
+
 import { useEffect, useState } from "react";
 const Modal = ({ onClose, modalID }) => {
   const [data, setData] = useState([]);
   const [buttonTextWatchList, setButtonText] = useState(false);
   const [buttonTextLike, setButtonTextLike] = useState(false);
+  const [trailerUrl, setTrailerUrl] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const getModalVideo = async (movieId) => {
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const videosUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`;
+
+    const trailerUrl = await fetch(videosUrl)
+      .then((response) => response.json())
+      .then((response) =>
+        response.results.find(
+          (video) => video.site === "YouTube" && video.type === "Trailer"
+        )
+      )
+      .then((trailer) => `https://www.youtube.com/embed/${trailer.key}`)
+      .catch((error) => {
+        console.error("Error fetching movie trailer:", error);
+      });
+
+  
+    setTrailerUrl(trailerUrl);
+  };
+
+  useState(() => {
+    getModalVideo(modalID);
+  }, [modalID]);
 
   const handleClick = () => {
     if (buttonTextWatchList === false) {
@@ -43,6 +70,11 @@ const Modal = ({ onClose, modalID }) => {
       });
   }, []);
 
+  const handleToggleExpand = () => {
+    setIsExpanded(prevState => !prevState);
+  };
+
+  // HTML -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   return (
     <section className="modal-overlay">
       <div className="modal-content">
@@ -63,7 +95,6 @@ const Modal = ({ onClose, modalID }) => {
 
         <div className="modal-details">
           <h1>{data.title}</h1>
-
           <div className="movieInfo">
             <p id="match"> {randomNumberInRange(1, 99)}% match</p>
             <p>{data.release_date}</p>
@@ -71,17 +102,14 @@ const Modal = ({ onClose, modalID }) => {
             <p id="time"> {data.runtime} minutes</p>
             <p id="quality"> HD</p>
           </div>
-
           <strong>Overview: </strong>
           <p id="overview">{data.overview}</p>
-
           <strong>Genres: </strong>
           <p id="genre">
             {data.genres?.length > 0
               ? data.genres.map((genre) => genre.name).join(", ")
               : "Loading..."}
           </p>
-
           <div className="modal-actions">
             <button
               className="action-button"
@@ -99,6 +127,21 @@ const Modal = ({ onClose, modalID }) => {
             >
               {buttonTextLike ? "👎 Unlike" : "👍 Like"}
             </button>
+          </div>
+          <div className="expand-section">
+            <h2>Movie Trailer</h2>
+            <button className="expand-button" onClick={handleToggleExpand}>
+              {isExpanded ? "⌃" : "⌄"}
+            </button>
+            {isExpanded && (
+              <iframe
+                src={trailerUrl}
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Movie Trailer"
+                className="modal-movie-trailer"
+              ></iframe>
+            )}
           </div>
         </div>
       </div>

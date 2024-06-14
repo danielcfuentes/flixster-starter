@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -145,4 +146,25 @@
 
 #watchlist.clicked {
   background-color: orange;
+}
+
+.expand-section {
+  margin: 0;
+  background-color: #303030;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  color: lightgray;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.modal-movie-trailer {
+  width: 100%;
+  height: 400px;
 }
