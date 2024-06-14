@@ -3,6 +3,24 @@ import "./Modal.css";
 import { useEffect, useState } from "react";
 const Modal = ({ onClose, modalID }) => {
   const [data, setData] = useState([]);
+  const [buttonTextWatchList, setButtonText] = useState(false);
+  const [buttonTextLike, setButtonTextLike] = useState(false);
+
+  const handleClick = () => {
+    if (buttonTextWatchList === false) {
+      setButtonText(true);
+    } else {
+      setButtonText(false);
+    }
+  };
+
+  const handleClickLike = () => {
+    if (buttonTextLike === false) {
+      setButtonTextLike(true);
+    } else {
+      setButtonTextLike(false);
+    }
+  };
 
   const randomNumberInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -33,7 +51,11 @@ const Modal = ({ onClose, modalID }) => {
         </button>
         <div className="modal-image-wrapper">
           <img
-            src={"https://image.tmdb.org/t/p/w500" + data.backdrop_path}
+            src={
+              !data?.backdrop_path
+                ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1f4C-cWV03_czRXhL1THkOdS9RDnAtPxRnA&s"
+                : "https://image.tmdb.org/t/p/w500" + data.backdrop_path
+            }
             alt="Movie Poster"
             className="modal-image"
           />
@@ -61,9 +83,22 @@ const Modal = ({ onClose, modalID }) => {
           </p>
 
           <div className="modal-actions">
-            <button className="action-button">➕ My List</button>
-            <button className="action-button">👍 Rate</button>
-            <button className="action-button">⬇️ Download</button>
+            <button
+              className="action-button"
+              onClick={handleClick}
+              id="watchlist"
+            >
+              {buttonTextWatchList
+                ? "➖ Remove from Watchlist"
+                : "➕ Add to Watchlist"}
+            </button>
+            <button
+              className="action-button"
+              onClick={handleClickLike}
+              id="like"
+            >
+              {buttonTextLike ? "👎 Unlike" : "👍 Like"}
+            </button>
           </div>
         </div>
       </div>

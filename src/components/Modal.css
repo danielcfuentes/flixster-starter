@@ -84,13 +84,26 @@
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+  display: inline-block;
+  padding: 15px 25px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
 }
 
 .action-button:hover {
   background: #b20710;
+}
+
+.action-button:active {
+  background-color: darkred;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .movieInfo {
@@ -128,4 +141,8 @@
 
 #genre {
   margin-bottom: 30px;
+}
+
+#watchlist.clicked {
+  background-color: orange;
 }
