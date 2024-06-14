@@ -1,14 +1,9 @@
 .header {
-  /* align-items: center; */
   width: 100%;
   color: #e50914;
-  /* padding-top: 10px; */
   text-align: center;
   font-size: 30px;
   display: flex;
   justify-content: center;
   margin-bottom: 0;
-
 }
-
-

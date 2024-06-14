@@ -1,31 +1,25 @@
 .App {
-  /* text-align: center; */
   width: 100%;
   background-color: black;
-  /* height: 100px; */
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-#AppHeader{
+#AppHeader {
   background-color: black;
-  /* background-color: orange; */
   width: 100%;
-
 }
 
-#AppBody{
+#AppBody {
   width: 100%;
   background-color: black;
   display: flex;
-  /* flex:1; */
-
 }
 
-#AppFooter{
+#AppFooter {
   background-color: black;
-  border-top: solid  #303030;
+  border-top: solid #303030;
   color: lightgray;
   border-width: 10px;
   width: 100%;
@@ -33,35 +27,10 @@
   text-align: center;
 }
 
-#container{
+#container {
   display: flex;
   flex-direction: column;
   margin-top: 0;
   margin-bottom: 0;
-  flex:1;
+  flex: 1;
 }
-
-/* .App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  color: white;
-  padding: 20px;
-} */
-
-/* @media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
-  }
-
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .search-bar form {
-    flex-direction: column;
-  }
-} */
