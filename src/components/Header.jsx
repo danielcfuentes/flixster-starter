@@ -1,9 +1,9 @@
 import "./Header.css";
-
+import logo from "./images/NOTFLIX.png";
 const Header = () => {
   return (
     <header className="header">
-      <img src="https://fontmeme.com/temporary/beef1b4d00d0514c8a8aaa801824ee9c.png"/>
+      <img src={logo} />
     </header>
   );
 };
